@@ -1,0 +1,130 @@
+*{
+    box-sizing: border-box;
+}
+h3 {
+	font-size: 40px;
+	font-family:"DM Sans",sans-serif;
+  color: white;
+  align-items: justify;
+  margin: 0px;
+}
+ body{
+ 	background:linear-gradient(40deg,rgb(65, 201, 225),rgb(230, 25, 195));
+ 	text-align: left;
+ }
+  p{
+  	font-size: 15px;
+  	font-family:"DM Sans",sans-serif; 
+  	font-weight:600;
+  	text-align: center;
+    color: black;
+  }
+    .box {
+    	/*border: 2px solid grey;*/
+        border-radius: 25px;
+        border: 0px;
+    	height: 50px;
+        width: 400px;
+        margin: 5px;
+        background-color: rgb(231, 230, 230);
+        text-align: center;
+        display: inline-block;
+        align-items: center;
+    }
+      .center{
+      	margin: auto;
+      	width: 60%;
+          border:5px;
+          background-color:white;
+          border-radius: 5px;
+      	padding: auto; 
+      	height: 750px;
+      }
+      .rdbutton{
+        font-family:"DM Sans",sans-serif;
+        width: 400px;
+        color: black;
+      }
+      
+      .subbutton{
+        height: 45px;
+        width: 200px;
+        font-family:"DM Sans",sans-serif;
+        background-image: linear-gradient(60deg,rgb(230, 25, 195),rgb(65, 201, 225));
+        border-radius: 25px;
+        border: 0px;
+      }
+ .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: blacks;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  align-items: center;
+  display: inline-block;
+  justify-content: center;
+  font-family: "DM Sans", sans-serif;
+  margin: 10px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  display: flex;
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+.modal-dialog{
+  		min-height: calc(100vh - 60px);
+  		display: flex;
+  		flex-direction: column;
+  		justify-content: center;
+  		overflow: auto;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px;
+  	}
+  	
+  	 .modal-header{
+  	 	 background:linear-gradient(35deg,rgb(218,37,241),rgb(31,66,223));
+       
+  	 }
+     .btn-btn-default{
+      border-radius: 25px;
+      border: 0px;
+      width: 100px;
+      height: 40px;
+      background:linear-gradient(35deg,rgb(31,66,223),rgb(218,37,241));
+       font-size: 14px;
+     }
+      .btn-btn-edit{
+         border-radius: 25px;
+         border: 0px;
+         width: 100px;
+         height: 40px;
+      }
+      
+
