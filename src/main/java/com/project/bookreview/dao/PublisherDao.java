@@ -7,6 +7,7 @@ package com.project.bookreview.dao;
 
 import com.project.bookreview.entities.Publisher;
 import com.project.bookreview.entities.Review;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -151,11 +152,36 @@ public class PublisherDao {
 
      
      
+  public List<Publisher> getAllPublishers(){
+   
+      Session s=this.factory.openSession();
+      Query query=s.createQuery("from Publisher");
+      List<Publisher> list=query.list();
+      
+      s.close();
+      
+      return list;
+      
+  }    
      
      
      
      
+     // get publisher by publisher id
+   public Publisher getPublisherById(int pid){
+       
+       Publisher pub=null;
+       try {
+           
+             Session ss=this.factory.openSession();
+              pub=ss.get(Publisher.class, pid);
+              ss.close();
+       } catch (HibernateException e) {
+           e.printStackTrace();
+       }
      
+    return pub;
+   }   
      
      
      

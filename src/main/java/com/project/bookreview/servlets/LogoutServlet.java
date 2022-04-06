@@ -5,12 +5,8 @@
  */
 package com.project.bookreview.servlets;
 
-import com.project.bookreview.dao.PublisherDao;
-import com.project.bookreview.entities.Publisher;
-import com.project.bookreview.helper.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ashut
  */
-public class AddPublisherServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,48 +31,16 @@ public class AddPublisherServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-   /*            // printing values for testing  
-             System.out.println("******started*********");
-            Enumeration<String> names = request.getParameterNames();
-
-            while (names.hasMoreElements()) {
-                String nn = names.nextElement();
-                System.out.println(nn);
-                System.out.println("*******values********");
-                System.out.println(request.getParameter(nn));
-            }
-    
-            System.out.println("*****ended************");        
-
-*/
-
-            String fname=request.getParameter("Fname").trim();
-              String lname=request.getParameter("Lname").trim();
-                String gender=request.getParameter("gender").trim();
-                  String email=request.getParameter("email").trim();
-                    String password=request.getParameter("password").trim();
-                      String contact=request.getParameter("contact").trim();
-                        String address=request.getParameter("address").trim();
-                        
-          Publisher pub=new Publisher(fname, lname, email, password, gender, contact, address);
-            int pid=new PublisherDao(FactoryProvider.getFactory()).savePublisher(pub);
+        
+            // changes required
+            //sign out google signed in and fb signed in user too
+            
+                HttpSession ss=request.getSession();
+            ss.removeAttribute("current-user");            ss.removeAttribute("isAdmin");   ss.removeAttribute("publisher");
+            response.sendRedirect("Login.jsp");
             
             
-            //saved suucessfully
-            if(pid>0){
             
-                    HttpSession ss = request.getSession();
-                        ss.setAttribute("message", "Publisher Added Successfully with id : "+pid);
-                        response.sendRedirect("admin.jsp");
-            }
-            else{
-                
-                //error
-                 HttpSession ss = request.getSession();
-                        ss.setAttribute("message", "Something went wrong");
-                        response.sendRedirect("error.jsp");
-            }
         }
     }
 

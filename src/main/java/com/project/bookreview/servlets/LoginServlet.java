@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
         
-            String email=request.getParameter("email");   String password=request.getParameter("password");
+            String email=request.getParameter("email").trim();   String password=request.getParameter("password").trim();
             
                System.out.println("here----"+email+" --"+password);
                
@@ -64,8 +64,9 @@ public class LoginServlet extends HttpServlet {
                          //verify admin credentials 
                     Admin admin=new AdminDao(FactoryProvider.getFactory()).getAdminByEmailAndPassword(email, password);
                           if(admin!=null){
+                                  System.out.println("Adminnnnn user");
                             // redirect to admin page
-                             ss.setAttribute("current-user", admin);
+                             ss.setAttribute("admin", admin);
                                  ss.setAttribute("isAdmin", "Y");
                                 response.sendRedirect("admin.jsp");
                           }
@@ -75,8 +76,11 @@ public class LoginServlet extends HttpServlet {
                            //verify admin credentials 
                      Publisher pub=new PublisherDao(FactoryProvider.getFactory()).getPublisherByEmailAndPassword(email, password);
                           if(pub!=null){
+                              
+                                  System.out.println("publisherrrr");
                                   //redirect to publisher page
-                               
+                                  ss.setAttribute("publisher", pub);
+                              response.sendRedirect("Publisher.jsp");
                           }
                   
                       }
@@ -97,7 +101,7 @@ public class LoginServlet extends HttpServlet {
                           //redirect to rating page
                           System.out.println("Normal User");
                           
-                 
+                  response.sendRedirect("Home.jsp");
                       
                       
                       

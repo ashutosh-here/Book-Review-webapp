@@ -5,8 +5,10 @@
  */
 package com.project.bookreview.servlets;
 
-import com.project.bookreview.dao.PublisherDao;
-import com.project.bookreview.entities.Publisher;
+import com.project.bookreview.dao.UserDao;
+import com.project.bookreview.entities.Feedback;
+import com.project.bookreview.entities.Rating;
+import com.project.bookreview.entities.User;
 import com.project.bookreview.helper.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ashut
  */
-public class AddPublisherServlet extends HttpServlet {
+public class RatingFeedbackServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,8 +37,8 @@ public class AddPublisherServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-   /*            // printing values for testing  
+     
+  /*                     // printing values for testing  
              System.out.println("******started*********");
             Enumeration<String> names = request.getParameterNames();
 
@@ -48,35 +50,31 @@ public class AddPublisherServlet extends HttpServlet {
             }
     
             System.out.println("*****ended************");        
-
 */
+    byte star=Byte.parseByte(request.getParameter("rating").trim());
+       String feedBack=request.getParameter("feedBack").trim();
+          int revId=Integer.parseInt(request.getParameter("revId").trim());   
+        
+           HttpSession ss=request.getSession();
+           User user = (User) ss.getAttribute("current-user");
+          
+ // changes required-  user cant give rating without login  2. user should not be able to  give rating to same review again( make changes in Review.jsp)
 
-            String fname=request.getParameter("Fname").trim();
-              String lname=request.getParameter("Lname").trim();
-                String gender=request.getParameter("gender").trim();
-                  String email=request.getParameter("email").trim();
-                    String password=request.getParameter("password").trim();
-                      String contact=request.getParameter("contact").trim();
-                        String address=request.getParameter("address").trim();
-                        
-          Publisher pub=new Publisher(fname, lname, email, password, gender, contact, address);
-            int pid=new PublisherDao(FactoryProvider.getFactory()).savePublisher(pub);
+         
+               
+            Rating rating=new Rating(star, user, revId);
+           Feedback feed=new Feedback(feedBack, user, revId);
+          
+          int id=new UserDao(FactoryProvider.getFactory()).saveRatingFeedback(rating, feed);
+            System.err.println(id);
+           if(id>0){
+                        out.println("sucess");
+                    }
+                    else{
+                        // review not added error
+                        out.println("error");
+                    }
             
-            
-            //saved suucessfully
-            if(pid>0){
-            
-                    HttpSession ss = request.getSession();
-                        ss.setAttribute("message", "Publisher Added Successfully with id : "+pid);
-                        response.sendRedirect("admin.jsp");
-            }
-            else{
-                
-                //error
-                 HttpSession ss = request.getSession();
-                        ss.setAttribute("message", "Something went wrong");
-                        response.sendRedirect("error.jsp");
-            }
         }
     }
 

@@ -19,8 +19,8 @@ import javax.persistence.Table;
  *
  * @author ashut
  */
-@Entity(name="User_Rating")
-@Table(name="User_Rating")
+@Entity
+@Table(name="User_Ratings")
 public class Rating {
 
       @Id
@@ -31,8 +31,8 @@ public class Rating {
         return id;
     }
 
-    public void setId(int ratingId) {
-        this.id = id;
+    public void setId(int Id) {
+        this.id = Id;
     }
 
   
@@ -44,13 +44,13 @@ public class Rating {
     
     
     @ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "User_ID")
+	@JoinColumn(name = "User_ID",nullable = false)
       private User user;
     
     
     
-    @Column(name = "book_id",unique = true,nullable = false )
-    private int bookId;
+    @Column(name = "review_id",nullable = false )
+    private int reviewId;
 
     public Rating() {
     }
@@ -59,10 +59,10 @@ public class Rating {
     
     
     
-    public Rating(byte userRating, User user, int bookId) {
+    public Rating(byte userRating, User user, int reviewId) {
         this.userRating = userRating;
         this.user = user;
-        this.bookId = bookId;
+        this.reviewId = reviewId;
     }
 
     public byte getUserRating() {
@@ -81,17 +81,17 @@ public class Rating {
         this.user = user;
     }
 
-    public int getBookId() {
-        return bookId;
+    public int getReviewId() {
+        return reviewId;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
     @Override
     public String toString() {
-        return "Rating{" + "id=" +id + ", userRating=" + userRating + ", user=" + user + ", bookId=" + bookId + '}';
+        return "Rating{" + "id=" +id + ", userRating=" + userRating + ", user=" + user + ", reviewId=" + reviewId + '}';
     }
 
     

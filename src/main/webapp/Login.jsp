@@ -20,12 +20,14 @@
         <script src="js/loginJS.js" type="text/javascript"></script>
     </head>
     <body>
+           <%@include  file="components/navbar.jsp" %> 
+                   <div class="container-fluid mt-3"> 
+                <%@include file="components/Message.jsp" %>   
+            </div> 
       <div id="container">
           
           
-           <div class="container-fluid mt-3"> 
-                <%@include file="components/Message.jsp" %>   
-            </div> 
+
           
                   <!--if user is already signed in redirect it to logout page->
                   
@@ -38,7 +40,7 @@
 
                 <c:set var="message" scope="session" value="You are already logged in !! First Logout from the current session"   />
 
-                <c:redirect url="Logout.jsp"/>
+                <c:redirect url="logout.jsp"/>
 
             </c:when>
 
@@ -80,6 +82,9 @@
 
   </div>
 </div>
+<!--          <div id="About" class="container-fluid" style=" position:absolute;margin: 0px!important;padding:0px!important">
+                <%--<%@include file="components/footer.jsp" %>--%> 
 
+            </div>-->
     </body>
 </html>

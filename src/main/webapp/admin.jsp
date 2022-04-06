@@ -105,7 +105,7 @@
 
 
         <!--admin validations-->
-        <c:set var="userSS" scope="session" value="${sessionScope['current-user']}"   />
+        <c:set var="userSS" scope="session" value="${sessionScope['admin']}"   />
         <!-- <%--       <c:out value="${userSS}"/><br>
                 <c:out value="${userSS.userType}"/><br>     --%>-->
 
@@ -231,7 +231,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Publisher details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -306,9 +306,10 @@
 
 
 
-        <div id="About" class="container-fluid" style=" position: relative;margin-top: 50px!important;padding:0px!important">
-            <%@include file="components/footer.jsp" %> 
+<!--     <div id="About" class="container-fluid" style=" position: relative;margin-bottom: 0px!important;padding:0px!important">
+                <%--<%@include file="components/footer.jsp" %>--%> 
 
-        </div>  
+            </div>   -->
+
     </body>
 </html>

@@ -46,7 +46,7 @@ public class GoogleAuthServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
         
-         String idTokenString=request.getParameter("idtoken");
+         String idTokenString=request.getParameter("idtoken").trim();
           //   out.println(idTokenString);
      String CLIENT_ID="914526410843-na9a6mfu5f4nakmakc4ag4hcrio7u1ad.apps.googleusercontent.com";
      GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
@@ -92,7 +92,13 @@ if (idToken != null) {
    //   System.out.println("ccccccccccc");
      if(userDao.ifUserExists(email)){
             System.out.println("User Already exists");
+            
+             // saving the current user in the seesion
+                     HttpSession ss=request.getSession();
+                     User user=userDao.getUserByEmail(email);
+                     ss.setAttribute("current-user", user);
             // redirect to rating page
+                  response.sendRedirect("Home.jsp");
      }
      else{
             System.out.println("User Already not exists");   
@@ -111,7 +117,7 @@ if (idToken != null) {
 
 
        //redirect to rating page
-                 
+                 response.sendRedirect("Home.jsp");
                  
             } 
             

@@ -1,0 +1,141 @@
+/*
+
+
+.wish-red{
+    color: red;
+     font-size: large; 
+}
+.wish-light{
+    color: #ff9999;
+     font-size: large; 
+}   */
+
+
+
+html,
+body {
+  font-family: "Kanit", sans-serif;
+  min-height: 100vh;
+  min-width: 100vw;
+  /*background: #fcfcfc;*/
+}
+
+
+.CCcontainer {
+  /*padding-top: 20px;*/
+  /*min-height: 100vh;*/
+  display: grid;
+  grid-auto-rows: 310px;
+  /*grid-gap: 30px;*/
+  /*grid-template-columns: repeat(3, minmax(200px, 300px));*/
+/*  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+          align-items: stretch;*/
+}
+@media screen and (max-width: 720px) {
+    
+    #cats *{
+        display:none!important;
+    }
+    
+    #cartTable {
+        width: 60%!important;
+    }
+     #heartTable {
+        width: 100%!important;
+    }
+    
+  .CCcontainer {
+    grid-template-columns: 1fr;
+    margin: 1px 0px!important;
+  }
+}
+
+.CCcard {
+  position: relative;
+  padding: 5px;
+  background: white;
+  display: grid;
+  grid-template-rows: 8fr 1fr 1fr;
+  box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.057);
+  -webkit-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+}
+.CCcard .card-content {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  width: 100%;
+}
+/*.CCcard .card-content .img {
+  width: 100%;
+  -webkit-box-pack: bottom;
+          justify-content: bottom;
+  align-content: bottom;
+  text-align: center;
+}*/
+.CCcard .card-content .img img {
+  max-width: 100%;
+  max-height: 220px;
+}
+.CCcard .card-description {
+  padding: 10px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  width: calc(100%-20px);
+}
+.CCcard .card-description .title {
+  text-transform: capitalize;
+  text-align: left;
+}
+.CCcard .card-description .cart {
+  float: right;
+  cursor: pointer;
+}
+.CCcard .card-myfooter {
+    
+    
+    
+  text-transform: capitalize;
+  /*padding: 0.2em;*/
+  border-top: 0.5px solid #ececec;
+  letter-spacing: 0.1em;
+  font-size: 9px;
+  color: #7b7b7b;
+  /*justify-items: left;*/
+  -webkit-box-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: flex;
+}
+.CCcard .card-myfooter .span {
+  margin: 5px;
+  width: auto;
+  background: #dedede;
+  padding: 4px 7px;
+  border-radius: 2px;
+  font-weight: 100;
+  cursor: pointer;
+  color:#000000;
+}
+.CCcard .card-myfooter .span:hover {
+  background: #aaaaaa;
+}
+.CCcard:hover {
+  -webkit-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+  box-shadow: 0px 45px 60px 0px rgba(0, 0, 0, 0.087);
+}

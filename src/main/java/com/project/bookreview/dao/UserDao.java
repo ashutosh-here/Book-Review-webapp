@@ -5,6 +5,7 @@
  */
 package com.project.bookreview.dao;
 
+import com.project.bookreview.entities.*;
 import com.project.bookreview.entities.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -94,5 +95,60 @@ public class UserDao {
        
         
     }
+    
+          //get user by email 
+    public  User getUserByEmail(String email){
+      
+       User user=null;
+        
+        try {
+            
+           String query="from User where userEmail =:e"; 
+            
+            Session session=this.factory.openSession();
+            Query q=session.createQuery(query);
+            q.setParameter("e", email);
+            user=(User)q.uniqueResult();
+            session.close();
+            
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+        return user;
+       
+        
+    }
+    
+    
+ public int saveRatingFeedback(Rating rating,Feedback feedback){
+     
+        int rId=-1999;
+        int fId=-1999;
+        try{
+           Session ss=this.factory.openSession();
+      Transaction tx=ss.beginTransaction();
+          rId  =    (int) ss.save(rating);
+          fId  =    (int) ss.save(feedback);
+       tx.commit();
+       ss.close();
+  
+           } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return rId+fId;
+    }    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

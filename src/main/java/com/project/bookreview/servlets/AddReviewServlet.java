@@ -15,11 +15,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -59,13 +61,15 @@ public class AddReviewServlet extends HttpServlet {
 
 
 
-           String authorName=request.getParameter("Aname");
-           String bookName=request.getParameter("Bname");
-           String bookIntro=request.getParameter("Bintro");
-           String bookFav=request.getParameter("Bfav");
-           String bookAud=request.getParameter("Baud");
+           String authorName=request.getParameter("Aname").trim();
+           String bookName=request.getParameter("Bname").trim();
+           String bookIntro=request.getParameter("Bintro").trim();
+           String bookFav=request.getParameter("Bfav").trim();
+           String bookAud=request.getParameter("Baud").trim();
             Part part = request.getPart("bookpic");
 
+              HttpSession ss=request.getSession();
+           Publisher publisher = (Publisher) ss.getAttribute("publisher");
             
             
             
@@ -85,13 +89,13 @@ public class AddReviewServlet extends HttpServlet {
                     fos.flush();
                     fos.close();
 
-                    
-                    
+                    // to genrate random unique book id
+                    int randomWithThreadLocalRandom = ThreadLocalRandom.current().nextInt();
                     // now saving the review in the db
-                    // changes required- get publisher by session  and set book id properly
+                   
                     PublisherDao pDao=new PublisherDao(FactoryProvider.getFactory());
-                    Publisher publisher =pDao.getPublisherByEmail("a@a");
-                    Review rev=new  Review(1, authorName, bookName, part.getSubmittedFileName(), bookIntro, bookFav, bookAud, publisher)   ;
+//                    Publisher publisher =pDao.getPublisherByEmail("a@a");
+                    Review rev=new  Review(randomWithThreadLocalRandom, authorName, bookName, part.getSubmittedFileName(), bookIntro, bookFav, bookAud, publisher)   ;
                     
                     int Rid=pDao.addReview(rev);
                     
